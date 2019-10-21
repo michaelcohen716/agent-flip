@@ -6,6 +6,7 @@ import "./KyberNetworkProxy.sol";
 contract AgentFlip {
     // Variables
     KyberNetworkProxy public kyberNetworkProxyContract;
+    ERC20 constant ETH_TOKEN_ADDRESS = ERC20(0x00eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee);
 
     // Events
     event Swap(address indexed sender, ERC20 srcToken, ERC20 destToken);
@@ -53,19 +54,21 @@ contract AgentFlip {
         ERC20 destToken,
         address destAddress,
         uint maxDestAmount
-    ) public {
+    ) public payable {
         uint minConversionRate;
 
-        // Check that the token transferFrom has succeeded
-        require(srcToken.transferFrom(msg.sender, address(this), srcQty));
+        //Check if the source token is Ether
+        if (srcToken != ETH_TOKEN_ADDRESS) {
+            // Check that the token transferFrom has succeeded
+            require(srcToken.transferFrom(msg.sender, address(this), srcQty));
 
-        // Mitigate ERC20 Approve front-running attack, by initially setting
-        // allowance to 0
-        require(srcToken.approve(address(kyberNetworkProxyContract), 0));
+            // Mitigate ERC20 Approve front-running attack, by initially setting
+            // allowance to 0
+            require(srcToken.approve(address(kyberNetworkProxyContract), 0));
 
-        // Set the spender's token allowance to tokenQty
-        require(srcToken.approve(address(kyberNetworkProxyContract), srcQty));
-
+            // Set the spender's token allowance to tokenQty
+            require(srcToken.approve(address(kyberNetworkProxyContract), srcQty));
+        }
         // Get the minimum conversion rate
         (minConversionRate,) = kyberNetworkProxyContract.getExpectedRate(srcToken, destToken, srcQty);
 
@@ -77,11 +80,12 @@ contract AgentFlip {
             destAddress,
             maxDestAmount,
             minConversionRate,
-            0 //walletId for fee sharing program
+            msg.sender //walletId for fee sharing program
         );
 
         // Log the event
         Swap(msg.sender, srcToken, destToken);
     }
+    function() payable {}
 }
 
