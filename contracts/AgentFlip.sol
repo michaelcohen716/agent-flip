@@ -6,12 +6,13 @@ import "./KyberNetworkProxy.sol";
 contract AgentFlip {
     // Variables
     KyberNetworkProxy public kyberNetworkProxyContract;
-    ERC20 constant ETH_TOKEN_ADDRESS = ERC20(0x00eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee);
+    ERC20 constant internal ETH_TOKEN_ADDRESS = ERC20(0x00eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee);
+    address internal daiTokenAddress = address(0xaD6D458402F60fD3Bd25163575031ACDce07538D);
 
     // Events
-    event Swap(address indexed sender, ERC20 srcToken, ERC20 destToken);
+    event LogShortEthForDai(address indexed sender, uint amount);
+    event LogDaiToLongEth(address indexed sender, uint amount);
 
-    // Functions
     /**
      * @dev Contract constructor
      * @param _kyberNetworkProxyContract KyberNetworkProxy contract address
@@ -22,70 +23,101 @@ contract AgentFlip {
         kyberNetworkProxyContract = _kyberNetworkProxyContract;
     }
 
+    //TO-DO Add modifiers to setter functions
     /**
-     * @dev Gets the conversion rate for the destToken given the srcQty.
-     * @param srcToken source token contract address
-     * @param srcQty amount of source tokens
-     * @param destToken destination token contract address
-     */
-    function getConversionRates(
-        ERC20 srcToken,
-        uint srcQty,
-        ERC20 destToken
-    ) public
-      view
-      returns (uint, uint)
-    {
-      return kyberNetworkProxyContract.getExpectedRate(srcToken, destToken, srcQty);
-
+    * @dev Set DAI token address
+    * @param _daiAddress DAI token address
+    **/
+    function setDaiTokenAddress(address _daiAddress) external {
+        daiTokenAddress = _daiAddress;
     }
 
     /**
-     * @dev Swap the user's ERC20 token to another ERC20 token/ETH
-     * @param srcToken source token contract address
-     * @param srcQty amount of source tokens
-     * @param destToken destination token contract address
-     * @param destAddress address to send swapped tokens to
-     * @param maxDestAmount address to send swapped tokens to
-     */
-    function executeSwap(
-        ERC20 srcToken,
-        uint srcQty,
-        ERC20 destToken,
-        address destAddress,
-        uint maxDestAmount
-    ) public payable {
+    * @dev Swap the user's ETH to DAI token
+    **/
+    function shortEthForDai() public payable {
         uint minConversionRate;
+        ERC20 token = ERC20(daiTokenAddress);
+        address destAddress = msg.sender;
 
-        //Check if the source token is Ether
-        if (srcToken != ETH_TOKEN_ADDRESS) {
-            // Check that the token transferFrom has succeeded
-            require(srcToken.transferFrom(msg.sender, address(this), srcQty));
-
-            // Mitigate ERC20 Approve front-running attack, by initially setting
-            // allowance to 0
-            require(srcToken.approve(address(kyberNetworkProxyContract), 0));
-
-            // Set the spender's token allowance to tokenQty
-            require(srcToken.approve(address(kyberNetworkProxyContract), srcQty));
-        }
         // Get the minimum conversion rate
-        (minConversionRate,) = kyberNetworkProxyContract.getExpectedRate(srcToken, destToken, srcQty);
+        (minConversionRate,) = kyberNetworkProxyContract.getExpectedRate(ETH_TOKEN_ADDRESS, token, msg.value);
 
-        // Swap the ERC20 token and send to destAddress
-        kyberNetworkProxyContract.trade(
-            srcToken,
-            srcQty,
-            destToken,
-            destAddress,
-            maxDestAmount,
-            minConversionRate,
-            msg.sender //walletId for fee sharing program
-        );
+        // Swap the ETH to ERC20 token
+        uint destAmount = kyberNetworkProxyContract.swapEtherToToken.value(msg.value)(token, minConversionRate);
+
+        // Send the swapped tokens to the destination address
+        require(token.transfer(destAddress, destAmount));
 
         // Log the event
-        Swap(msg.sender, srcToken, destToken);
+        LogShortEthForDai(msg.sender, destAmount);
     }
-    function() payable {}
+
+    /**
+    * @dev Swap the user's DAI tokens for ETH
+    * @param tokenQty Number of DAI tokens to swap
+    **/
+    function daiToLongEth(uint tokenQty) public {
+        uint minConversionRate;
+        ERC20 token = ERC20(daiTokenAddress);
+        address destAddress = msg.sender;
+
+        //For this to work, user must call approve to give allowance to this contract
+
+        // Check that the token transferFrom has succeeded
+        require(token.transferFrom(msg.sender, address(this), tokenQty));
+
+        // Mitigate ERC20 Approve front-running attack, by initially setting
+        // allowance to 0
+        require(token.approve(address(kyberNetworkProxyContract), 0));
+
+        // Set the spender's token allowance to tokenQty
+        require(token.approve(address(kyberNetworkProxyContract), tokenQty));
+
+        // Get the minimum conversion rate
+        (minConversionRate,) = kyberNetworkProxyContract.getExpectedRate(token, ETH_TOKEN_ADDRESS, tokenQty);
+
+        // Swap the ERC20 token to ETH
+        uint destAmount = kyberNetworkProxyContract.swapTokenToEther(token, tokenQty, minConversionRate);
+
+        // Send the swapped ETH to the destination address
+        destAddress.transfer(destAmount);
+
+        // Log the event
+        LogDaiToLongEth(msg.sender, tokenQty);
+    }
+
+    //@dev Swap the user's ERC20 token to ETH
+    //@param token source token contract address
+    //@param tokenQty amount of source tokens
+    //@param destAddress address to send swapped ETH to
+    function execSwap(ERC20 token, uint tokenQty, address destAddress) public {
+        uint minConversionRate;
+
+        // Check that the token transferFrom has succeeded
+        require(token.transferFrom(msg.sender, address(this), tokenQty));
+
+        // Mitigate ERC20 Approve front-running attack, by initially setting
+        // allowance to 0
+        require(token.approve(address(kyberNetworkProxyContract), 0));
+
+        // Set the spender's token allowance to tokenQty
+        require(token.approve(address(kyberNetworkProxyContract), tokenQty));
+
+        // Get the minimum conversion rate
+        (minConversionRate,) = kyberNetworkProxyContract.getExpectedRate(token, ETH_TOKEN_ADDRESS, tokenQty);
+
+        // Swap the ERC20 token to ETH
+        uint destAmount = kyberNetworkProxyContract.swapTokenToEther(token, tokenQty, minConversionRate);
+
+        // Send the swapped ETH to the destination address
+        destAddress.transfer(destAmount);
+
+        // Log the event
+        //Swap(msg.sender, token, destAmount);
+    }
+
+    //Fallback function
+    function() public payable {}
 }
 
