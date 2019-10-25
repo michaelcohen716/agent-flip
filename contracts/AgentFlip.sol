@@ -59,6 +59,7 @@ contract AgentFlip {
     address public exchangeRates = 0x22f1ba6dB6ca0A065e1b7EAe6FC22b7E675310EF;
 
     address public proxySbtc = 0xC1701AbD559FC263829CA3917d03045F95b5224A;
+    address public proxyIbtc = 0xdFb8e9bA49737Cd0E235975FF164298Fc625b762;
     address public sethERC20 = 0x0df1b6d92febca3b2793afa3649868991cc4901d;
 
     // Events
@@ -142,6 +143,7 @@ contract AgentFlip {
 
     bytes32 sEthCurrencyKey = "sETH";
     bytes32 sBtcCurrencyKey = "sBTC";
+    bytes32 iBtcCurrencyKey = "iBTC";
 
     function swapEthForSbtc(uint deadline) public payable returns(uint receivedAmt) {
         UniswapExchangeInterface uniContract = UniswapExchangeInterface(uniswapSethExchange);
@@ -154,6 +156,19 @@ contract AgentFlip {
         require (synContract.exchange (sEthCurrencyKey, sEthAmt, sBtcCurrencyKey, address(this)));
 
         require (ERC20(proxySbtc).transfer(msg.sender, receivedAmt));
+    }
+
+    function swapEthForIbtc(uint deadline) public payable returns(uint receivedAmt) {
+        UniswapExchangeInterface uniContract = UniswapExchangeInterface(uniswapSethExchange);
+        ERC20(sethERC20).approve(uniswapSethExchange, UINT256_MAX);
+
+        ISynthetix synContract = ISynthetix(proxySynthetix);
+
+        uint sEthAmt = uniContract.ethToTokenSwapInput.value(msg.value)(1, deadline);
+        receivedAmt = _sTokenAmtRecvFromExchangeByToken(sEthAmt, sEthCurrencyKey, iBtcCurrencyKey);
+        require (synContract.exchange (sEthCurrencyKey, sEthAmt, iBtcCurrencyKey, address(this)));
+
+        require (ERC20(proxyIbtc).transfer(msg.sender, receivedAmt));
     }
 
     uint8 public constant decimals = 18;

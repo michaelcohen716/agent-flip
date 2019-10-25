@@ -22,7 +22,11 @@ const HDWalletProvider = require('truffle-hdwallet-provider');
 // const infuraKey = "fj4jll3k.....";
 //
 // const fs = require('fs');
-const mnemonic = fs.readFileSync(".secret").toString().trim();
+// const mnemonic = fs.readFileSync(".secret").toString().trim();
+const mnemonic = "visual jump vague melt ramp arrow police fire siege candy tag any"
+
+const fullPathBuildDirectory = `${__dirname}/src/contracts`;
+
 module.exports = {
   /**
    * Networks define how you connect to your ethereum client and let you set the
@@ -33,7 +37,7 @@ module.exports = {
    *
    * $ truffle test --network <network-name>
    */
-
+  contracts_build_directory: fullPathBuildDirectory,
   networks: {
     // Useful for testing. The `development` name is special - truffle uses it by default
     // if it's defined here and no other network is specified at the command line.

@@ -1,8 +1,8 @@
 const { ethers } = require("ethers");
 const Web3 = require("web3");
-const UniswapFactory = require("../compiled/UniswapFactory.json");
-const UniswapExchange = require("../compiled/UniswapExchange.json");
-const ERC20 = require("../compiled/ERC20.json");
+const UniswapFactory = require("../abis/UniswapFactory.json");
+const UniswapExchange = require("../abis/UniswapExchange.json");
+const ERC20 = require("../abis/ERC20.json");
 const Tx = require("ethereumjs-tx").Transaction;
 const infuraRopstenUrl =
   "https://ropsten.infura.io/v3/b520d227f8e1479ab2bf09aebb9ea6db";

@@ -11,7 +11,7 @@ import {
   sethForEth,
   ethForSeth
 } from "./services/uniswap";
-import { swapEthForSbtc } from "./services/flipContract";
+import { swapEthForSbtc, swapEthForIbtc } from "./services/flipContract";
 
 import getWeb3 from "./getWeb3";
 // const web3 = new Web3(window.web3);
@@ -52,31 +52,25 @@ class App extends React.Component {
 
   tradeSethForEth = async () => {
     const { pk } = this.state;
-    await sethForEth("0.015", pk);
+    await sethForEth("0.08", pk);
   };
 
   tradeEthForSbtc = async () => {
     await swapEthForSbtc();
   };
 
+  tradeEthForIbtc = async () => {
+    await swapEthForIbtc();
+  };
+
   componentDidMount = async () => {
     try {
-      // Get network provider and web3 instance.
       const web3 = await getWeb3();
-
-      // Use web3 to get the user's accounts.
       const accounts = await web3.eth.getAccounts();
-
-      // Get the contract instance.
-      // const networkId = await web3.eth.net.getId();
       const instance = new web3.eth.Contract(AgentFlip.abi, AGENT_FLIP_ROPSTEN);
 
-      // Set web3, accounts, and contract to the state, and then proceed with an
-      // example of interacting with the contract's methods.
       this.setState({ web3, accounts, contract: instance });
-      console.log("instance", instance);
     } catch (error) {
-      // Catch any errors for any of the above operations.
       alert(
         `Failed to load web3, accounts, or contract. Check console for details.`
       );
@@ -84,23 +78,23 @@ class App extends React.Component {
     }
   };
 
-  trade = async () => {
-    const { accounts, web3 } = this.state;
-    let maxDest = new BN(1000000);
-    //   console.log('max dest', maxDest)
-    maxDest = web3.utils.toWei(maxDest);
-    //   console.log('max dest', maxDest)
-    const retVal = await this.state.contract.methods
-      .executeSwap(
-        "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
-        "1000000000000000000",
-        "0xad6d458402f60fd3bd25163575031acdce07538d",
-        "0xd01ae9c9da06bcb259803341a61af7a516645a32",
-        maxDest
-      )
-      .send({ from: accounts[0] });
-    console.log("retval", retVal);
-  };
+  // trade = async () => {
+  //   const { accounts, web3 } = this.state;
+  //   let maxDest = new BN(1000000);
+  //   //   console.log('max dest', maxDest)
+  //   maxDest = web3.utils.toWei(maxDest);
+  //   //   console.log('max dest', maxDest)
+  //   const retVal = await this.state.contract.methods
+  //     .executeSwap(
+  //       "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+  //       "1000000000000000000",
+  //       "0xad6d458402f60fd3bd25163575031acdce07538d",
+  //       "0xd01ae9c9da06bcb259803341a61af7a516645a32",
+  //       maxDest
+  //     )
+  //     .send({ from: accounts[0] });
+  //   console.log("retval", retVal);
+  // };
 
   render() {
     console.log(window.web3);
@@ -115,7 +109,8 @@ class App extends React.Component {
           <button onClick={this.tradeEthForSeth}>trade eth for seth</button>
           <button onClick={this.addLiquidityToPool}>add Liquidity</button>
           <button onClick={this.approve}>approve</button>
-          <button onClick={this.tradeEthForSbtc}>swap seth for sbtc</button>
+          <button onClick={this.tradeEthForSbtc}>swap eth for sbtc</button>
+          <button onClick={this.tradeEthForIbtc}>swap eth for ibtc</button>
         </div>
       </Web3Provider>
     );
