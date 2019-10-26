@@ -29,15 +29,20 @@ const ASSETS = [
   }
 ];
 
-function AssetColumn({ headline }) {
+function AssetColumn({ headline, isInput }) {
   return (
     <div className="d-flex flex-column asset-column mt-3 p-3">
-      <h2 className="mx-auto">{headline}</h2>
+      <h2 className="mx-auto asset-column-headline">{headline}</h2>
       <div className="mt-2 d-flex flex-column">
         {ASSETS.map((asset, i) => {
           const { name, tooltipContent } = asset;
           return (
-            <AssetItem name={name} tooltipContent={tooltipContent} key={i} />
+            <AssetItem
+              isInput={isInput}
+              name={name}
+              tooltipContent={tooltipContent}
+              key={i}
+            />
           );
         })}
       </div>

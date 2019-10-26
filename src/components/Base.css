@@ -37,6 +37,11 @@
   padding: 25px;
 }
 
+.detective {
+  height: 40px;
+  margin-top: -10px;
+}
+
 .supported-text {
   text-transform: uppercase;
   font-weight: bold;

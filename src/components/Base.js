@@ -1,7 +1,8 @@
 import React from "react";
 import SupportedAsset from "./SupportedAsset";
 import AssetColumn from "./AssetColumn/AssetColumn";
-import Transaction from "./Transaction/Transaction"
+import Transaction from "./Transaction/Transaction";
+import detective from "../assets/detective.png";
 import "./Base.css";
 
 function Base() {
@@ -17,10 +18,13 @@ function Base() {
             <SupportedAsset asset="ETH" />
             <SupportedAsset asset="LINK" />
           </div>
-          <div className="font-weight-bold">Agent Flip</div>
+          <div className="d-flex mr-2">
+            <img src={detective} className="img-fluid detective" />
+            <div className="font-weight-bold">Agent Flip</div>
+          </div>
         </div>
         <div className="d-flex">
-          <AssetColumn headline="Input" />
+          <AssetColumn headline="Input" isInput={true} />
           <Transaction />
           <AssetColumn headline="Output" />
         </div>
