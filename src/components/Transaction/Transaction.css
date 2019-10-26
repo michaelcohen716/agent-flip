@@ -44,4 +44,6 @@
   color: white;
   text-align: center;
   cursor: pointer;
+  letter-spacing: 1px;
+  font-weight: bold;
 }

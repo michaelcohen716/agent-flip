@@ -24,6 +24,13 @@ export async function ExchangeContract() {
   );
 }
 
+export async function ERC20Contract(address) {
+  return await new web3.eth.Contract(
+    ERC20,
+    address
+  )
+}
+
 async function TokenContract() {
   return await new web3.eth.Contract(ERC20, ROPSTEN_SETH_ADDRESS);
 }

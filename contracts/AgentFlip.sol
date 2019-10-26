@@ -186,7 +186,7 @@ contract AgentFlip {
         ISynthetix synContract = ISynthetix(proxySynthetix);
 
         uint sEthAmt = uniContract.ethToTokenSwapInput.value(msg.value)(1, deadline);
-        receivedAmt = _sTokenAmtRecvFromExchangeByToken(sEthAmt, sEthCurrencyKey, sBtcCurrencyKey);
+        receivedAmt = _synthReceived(sEthAmt, sEthCurrencyKey, sBtcCurrencyKey);
         require (synContract.exchange (sEthCurrencyKey, sEthAmt, sBtcCurrencyKey, address(this)));
 
         require (ERC20(proxySbtc).transfer(msg.sender, receivedAmt));
@@ -199,7 +199,7 @@ contract AgentFlip {
         ISynthetix synContract = ISynthetix(proxySynthetix);
 
         uint sEthAmt = uniContract.ethToTokenSwapInput.value(msg.value)(1, deadline);
-        receivedAmt = _sTokenAmtRecvFromExchangeByToken(sEthAmt, sEthCurrencyKey, iBtcCurrencyKey);
+        receivedAmt = _synthReceived(sEthAmt, sEthCurrencyKey, iBtcCurrencyKey);
         require (synContract.exchange (sEthCurrencyKey, sEthAmt, iBtcCurrencyKey, address(this)));
 
         require (ERC20(proxyIbtc).transfer(msg.sender, receivedAmt));
@@ -208,7 +208,7 @@ contract AgentFlip {
     uint8 public constant decimals = 18;
     uint public constant UNIT = 10 ** uint(decimals);
 
-    function _sTokenAmtRecvFromExchangeByToken (uint srcAmt, bytes32 srcKey, bytes32 dstKey) internal view returns (uint){
+    function _synthReceived (uint srcAmt, bytes32 srcKey, bytes32 dstKey) internal view returns (uint){
         IFeePool feePool = IFeePool(feePoolAddress);
         IExchangeRates synRatesContract = IExchangeRates(exchangeRates);
         uint dstAmt = synRatesContract.effectiveValue(srcKey, srcAmt, dstKey);
