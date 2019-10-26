@@ -1,0 +1,9 @@
+.App {
+  min-width: 1200px;
+}
+
+body {
+ background: black;
+ font-family: 'Oswald', sans-serif;
+ /* font-family: 'Staatliches', cursive; */
+}
