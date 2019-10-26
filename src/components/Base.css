@@ -1,0 +1,73 @@
+.silver-bg-right {
+  background-color: blue;
+  /* background: rgba(135,138,140,0.5); */
+  /* background-image: url("../assets/silver-bg.jpg"); */
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 400px;
+  width: 100%;
+  transform: rotate(45deg);
+  top: 100px;
+  opacity: 0.3;
+}
+
+.silver-bg-left {
+  background-color: blue;
+  /* background: rgba(135,138,140,0.5); */
+  /* background-image: url("../assets/silver-bg.jpg"); */
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 400px;
+  width: 100%;
+  transform: rotate(135deg);
+  top: 100px;
+  opacity: 0.3;
+}
+
+.base {
+  width: 68%;
+  min-width: 600px;
+  left: 16%;
+  height: 650px;
+  background-color: whitesmoke;
+  z-index: 100;
+  position: absolute;
+  top: 50px;
+  border-radius: 8px;
+  padding: 25px;
+}
+
+.supported-text {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 14px;
+  margin-top: 3px;
+}
+
+.asset {
+  padding: 3px;
+  border-radius: 8px;
+  width: 40px;
+  height: 30px;
+  font-weight: bold;
+  font-size: 12px;
+  text-align: center;
+  align-items: center;
+  text-transform: uppercase;
+}
+
+.supported-asset {
+  cursor: pointer;
+  background: gray;
+  color: blue;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.46);
+}
+
+.unsupported-asset {
+  background: lightgray;
+  color: gray;
+}
+
+.supported-asset-text {
+  margin-top: 3px;
+}

@@ -10,6 +10,7 @@
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-scripts": "3.2.0",
+    "react-tooltip-lite": "^1.10.0",
     "truffle-hdwallet-provider": "^1.0.17",
     "web3": "^1.2.1",
     "web3-react": "^5.0.4"
