@@ -93,14 +93,14 @@
     "absolutePath": "/Users/michaeljcohen/Desktop/projects/AgentFlip/contracts/SimpleNetworkInterface.sol",
     "exportedSymbols": {
       "SimpleNetworkInterface": [
-        2273
+        2649
       ]
     },
-    "id": 2274,
+    "id": 2650,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 2238,
+        "id": 2614,
         "literals": [
           "solidity",
           "0.4",
@@ -112,10 +112,10 @@
       {
         "absolutePath": "/Users/michaeljcohen/Desktop/projects/AgentFlip/contracts/ERC20Interface.sol",
         "file": "./ERC20Interface.sol",
-        "id": 2239,
+        "id": 2615,
         "nodeType": "ImportDirective",
-        "scope": 2274,
-        "sourceUnit": 701,
+        "scope": 2650,
+        "sourceUnit": 1077,
         "src": "26:30:8",
         "symbolAliases": [],
         "unitAlias": ""
@@ -126,16 +126,16 @@
         "contractKind": "interface",
         "documentation": "@title simple interface for Kyber Network ",
         "fullyImplemented": false,
-        "id": 2273,
+        "id": 2649,
         "linearizedBaseContracts": [
-          2273
+          2649
         ],
         "name": "SimpleNetworkInterface",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": null,
-            "id": 2252,
+            "id": 2628,
             "implemented": false,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -143,31 +143,31 @@
             "name": "swapTokenToToken",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2248,
+              "id": 2624,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2241,
+                  "id": 2617,
                   "name": "src",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2252,
+                  "scope": 2628,
                   "src": "171:9:8",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_ERC20_$700",
+                    "typeIdentifier": "t_contract$_ERC20_$1076",
                     "typeString": "contract ERC20"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 2240,
+                    "id": 2616,
                     "name": "ERC20",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 700,
+                    "referencedDeclaration": 1076,
                     "src": "171:5:8",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_ERC20_$700",
+                      "typeIdentifier": "t_contract$_ERC20_$1076",
                       "typeString": "contract ERC20"
                     }
                   },
@@ -176,10 +176,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 2243,
+                  "id": 2619,
                   "name": "srcAmount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2252,
+                  "scope": 2628,
                   "src": "182:14:8",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -188,7 +188,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2242,
+                    "id": 2618,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "182:4:8",
@@ -202,26 +202,26 @@
                 },
                 {
                   "constant": false,
-                  "id": 2245,
+                  "id": 2621,
                   "name": "dest",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2252,
+                  "scope": 2628,
                   "src": "198:10:8",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_ERC20_$700",
+                    "typeIdentifier": "t_contract$_ERC20_$1076",
                     "typeString": "contract ERC20"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 2244,
+                    "id": 2620,
                     "name": "ERC20",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 700,
+                    "referencedDeclaration": 1076,
                     "src": "198:5:8",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_ERC20_$700",
+                      "typeIdentifier": "t_contract$_ERC20_$1076",
                       "typeString": "contract ERC20"
                     }
                   },
@@ -230,10 +230,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 2247,
+                  "id": 2623,
                   "name": "minConversionRate",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2252,
+                  "scope": 2628,
                   "src": "210:22:8",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -242,7 +242,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2246,
+                    "id": 2622,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "210:4:8",
@@ -259,15 +259,15 @@
             },
             "payable": false,
             "returnParameters": {
-              "id": 2251,
+              "id": 2627,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2250,
+                  "id": 2626,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2252,
+                  "scope": 2628,
                   "src": "249:4:8",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -276,7 +276,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2249,
+                    "id": 2625,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "249:4:8",
@@ -291,7 +291,7 @@
               ],
               "src": "248:6:8"
             },
-            "scope": 2273,
+            "scope": 2649,
             "src": "145:110:8",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -299,7 +299,7 @@
           },
           {
             "body": null,
-            "id": 2261,
+            "id": 2637,
             "implemented": false,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -307,31 +307,31 @@
             "name": "swapEtherToToken",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2257,
+              "id": 2633,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2254,
+                  "id": 2630,
                   "name": "token",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2261,
+                  "scope": 2637,
                   "src": "286:11:8",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_ERC20_$700",
+                    "typeIdentifier": "t_contract$_ERC20_$1076",
                     "typeString": "contract ERC20"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 2253,
+                    "id": 2629,
                     "name": "ERC20",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 700,
+                    "referencedDeclaration": 1076,
                     "src": "286:5:8",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_ERC20_$700",
+                      "typeIdentifier": "t_contract$_ERC20_$1076",
                       "typeString": "contract ERC20"
                     }
                   },
@@ -340,10 +340,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 2256,
+                  "id": 2632,
                   "name": "minConversionRate",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2261,
+                  "scope": 2637,
                   "src": "299:22:8",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -352,7 +352,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2255,
+                    "id": 2631,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "299:4:8",
@@ -369,15 +369,15 @@
             },
             "payable": true,
             "returnParameters": {
-              "id": 2260,
+              "id": 2636,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2259,
+                  "id": 2635,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2261,
+                  "scope": 2637,
                   "src": "346:4:8",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -386,7 +386,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2258,
+                    "id": 2634,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "346:4:8",
@@ -401,7 +401,7 @@
               ],
               "src": "345:6:8"
             },
-            "scope": 2273,
+            "scope": 2649,
             "src": "260:92:8",
             "stateMutability": "payable",
             "superFunction": null,
@@ -409,7 +409,7 @@
           },
           {
             "body": null,
-            "id": 2272,
+            "id": 2648,
             "implemented": false,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -417,31 +417,31 @@
             "name": "swapTokenToEther",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2268,
+              "id": 2644,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2263,
+                  "id": 2639,
                   "name": "token",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2272,
+                  "scope": 2648,
                   "src": "383:11:8",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_ERC20_$700",
+                    "typeIdentifier": "t_contract$_ERC20_$1076",
                     "typeString": "contract ERC20"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 2262,
+                    "id": 2638,
                     "name": "ERC20",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 700,
+                    "referencedDeclaration": 1076,
                     "src": "383:5:8",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_ERC20_$700",
+                      "typeIdentifier": "t_contract$_ERC20_$1076",
                       "typeString": "contract ERC20"
                     }
                   },
@@ -450,10 +450,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 2265,
+                  "id": 2641,
                   "name": "srcAmount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2272,
+                  "scope": 2648,
                   "src": "396:14:8",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -462,7 +462,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2264,
+                    "id": 2640,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "396:4:8",
@@ -476,10 +476,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 2267,
+                  "id": 2643,
                   "name": "minConversionRate",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2272,
+                  "scope": 2648,
                   "src": "412:22:8",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -488,7 +488,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2266,
+                    "id": 2642,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "412:4:8",
@@ -505,15 +505,15 @@
             },
             "payable": false,
             "returnParameters": {
-              "id": 2271,
+              "id": 2647,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2270,
+                  "id": 2646,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2272,
+                  "scope": 2648,
                   "src": "451:4:8",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -522,7 +522,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2269,
+                    "id": 2645,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "451:4:8",
@@ -537,14 +537,14 @@
               ],
               "src": "450:6:8"
             },
-            "scope": 2273,
+            "scope": 2649,
             "src": "357:100:8",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 2274,
+        "scope": 2650,
         "src": "106:353:8"
       }
     ],
@@ -554,14 +554,14 @@
     "absolutePath": "/Users/michaeljcohen/Desktop/projects/AgentFlip/contracts/SimpleNetworkInterface.sol",
     "exportedSymbols": {
       "SimpleNetworkInterface": [
-        2273
+        2649
       ]
     },
-    "id": 2274,
+    "id": 2650,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 2238,
+        "id": 2614,
         "literals": [
           "solidity",
           "0.4",
@@ -573,10 +573,10 @@
       {
         "absolutePath": "/Users/michaeljcohen/Desktop/projects/AgentFlip/contracts/ERC20Interface.sol",
         "file": "./ERC20Interface.sol",
-        "id": 2239,
+        "id": 2615,
         "nodeType": "ImportDirective",
-        "scope": 2274,
-        "sourceUnit": 701,
+        "scope": 2650,
+        "sourceUnit": 1077,
         "src": "26:30:8",
         "symbolAliases": [],
         "unitAlias": ""
@@ -587,16 +587,16 @@
         "contractKind": "interface",
         "documentation": "@title simple interface for Kyber Network ",
         "fullyImplemented": false,
-        "id": 2273,
+        "id": 2649,
         "linearizedBaseContracts": [
-          2273
+          2649
         ],
         "name": "SimpleNetworkInterface",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": null,
-            "id": 2252,
+            "id": 2628,
             "implemented": false,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -604,31 +604,31 @@
             "name": "swapTokenToToken",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2248,
+              "id": 2624,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2241,
+                  "id": 2617,
                   "name": "src",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2252,
+                  "scope": 2628,
                   "src": "171:9:8",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_ERC20_$700",
+                    "typeIdentifier": "t_contract$_ERC20_$1076",
                     "typeString": "contract ERC20"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 2240,
+                    "id": 2616,
                     "name": "ERC20",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 700,
+                    "referencedDeclaration": 1076,
                     "src": "171:5:8",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_ERC20_$700",
+                      "typeIdentifier": "t_contract$_ERC20_$1076",
                       "typeString": "contract ERC20"
                     }
                   },
@@ -637,10 +637,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 2243,
+                  "id": 2619,
                   "name": "srcAmount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2252,
+                  "scope": 2628,
                   "src": "182:14:8",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -649,7 +649,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2242,
+                    "id": 2618,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "182:4:8",
@@ -663,26 +663,26 @@
                 },
                 {
                   "constant": false,
-                  "id": 2245,
+                  "id": 2621,
                   "name": "dest",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2252,
+                  "scope": 2628,
                   "src": "198:10:8",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_ERC20_$700",
+                    "typeIdentifier": "t_contract$_ERC20_$1076",
                     "typeString": "contract ERC20"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 2244,
+                    "id": 2620,
                     "name": "ERC20",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 700,
+                    "referencedDeclaration": 1076,
                     "src": "198:5:8",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_ERC20_$700",
+                      "typeIdentifier": "t_contract$_ERC20_$1076",
                       "typeString": "contract ERC20"
                     }
                   },
@@ -691,10 +691,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 2247,
+                  "id": 2623,
                   "name": "minConversionRate",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2252,
+                  "scope": 2628,
                   "src": "210:22:8",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -703,7 +703,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2246,
+                    "id": 2622,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "210:4:8",
@@ -720,15 +720,15 @@
             },
             "payable": false,
             "returnParameters": {
-              "id": 2251,
+              "id": 2627,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2250,
+                  "id": 2626,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2252,
+                  "scope": 2628,
                   "src": "249:4:8",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -737,7 +737,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2249,
+                    "id": 2625,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "249:4:8",
@@ -752,7 +752,7 @@
               ],
               "src": "248:6:8"
             },
-            "scope": 2273,
+            "scope": 2649,
             "src": "145:110:8",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -760,7 +760,7 @@
           },
           {
             "body": null,
-            "id": 2261,
+            "id": 2637,
             "implemented": false,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -768,31 +768,31 @@
             "name": "swapEtherToToken",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2257,
+              "id": 2633,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2254,
+                  "id": 2630,
                   "name": "token",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2261,
+                  "scope": 2637,
                   "src": "286:11:8",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_ERC20_$700",
+                    "typeIdentifier": "t_contract$_ERC20_$1076",
                     "typeString": "contract ERC20"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 2253,
+                    "id": 2629,
                     "name": "ERC20",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 700,
+                    "referencedDeclaration": 1076,
                     "src": "286:5:8",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_ERC20_$700",
+                      "typeIdentifier": "t_contract$_ERC20_$1076",
                       "typeString": "contract ERC20"
                     }
                   },
@@ -801,10 +801,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 2256,
+                  "id": 2632,
                   "name": "minConversionRate",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2261,
+                  "scope": 2637,
                   "src": "299:22:8",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -813,7 +813,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2255,
+                    "id": 2631,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "299:4:8",
@@ -830,15 +830,15 @@
             },
             "payable": true,
             "returnParameters": {
-              "id": 2260,
+              "id": 2636,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2259,
+                  "id": 2635,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2261,
+                  "scope": 2637,
                   "src": "346:4:8",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -847,7 +847,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2258,
+                    "id": 2634,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "346:4:8",
@@ -862,7 +862,7 @@
               ],
               "src": "345:6:8"
             },
-            "scope": 2273,
+            "scope": 2649,
             "src": "260:92:8",
             "stateMutability": "payable",
             "superFunction": null,
@@ -870,7 +870,7 @@
           },
           {
             "body": null,
-            "id": 2272,
+            "id": 2648,
             "implemented": false,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -878,31 +878,31 @@
             "name": "swapTokenToEther",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2268,
+              "id": 2644,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2263,
+                  "id": 2639,
                   "name": "token",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2272,
+                  "scope": 2648,
                   "src": "383:11:8",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_contract$_ERC20_$700",
+                    "typeIdentifier": "t_contract$_ERC20_$1076",
                     "typeString": "contract ERC20"
                   },
                   "typeName": {
                     "contractScope": null,
-                    "id": 2262,
+                    "id": 2638,
                     "name": "ERC20",
                     "nodeType": "UserDefinedTypeName",
-                    "referencedDeclaration": 700,
+                    "referencedDeclaration": 1076,
                     "src": "383:5:8",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_ERC20_$700",
+                      "typeIdentifier": "t_contract$_ERC20_$1076",
                       "typeString": "contract ERC20"
                     }
                   },
@@ -911,10 +911,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 2265,
+                  "id": 2641,
                   "name": "srcAmount",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2272,
+                  "scope": 2648,
                   "src": "396:14:8",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -923,7 +923,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2264,
+                    "id": 2640,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "396:4:8",
@@ -937,10 +937,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 2267,
+                  "id": 2643,
                   "name": "minConversionRate",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2272,
+                  "scope": 2648,
                   "src": "412:22:8",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -949,7 +949,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2266,
+                    "id": 2642,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "412:4:8",
@@ -966,15 +966,15 @@
             },
             "payable": false,
             "returnParameters": {
-              "id": 2271,
+              "id": 2647,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 2270,
+                  "id": 2646,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 2272,
+                  "scope": 2648,
                   "src": "451:4:8",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -983,7 +983,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 2269,
+                    "id": 2645,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "451:4:8",
@@ -998,14 +998,14 @@
               ],
               "src": "450:6:8"
             },
-            "scope": 2273,
+            "scope": 2649,
             "src": "357:100:8",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 2274,
+        "scope": 2650,
         "src": "106:353:8"
       }
     ],
@@ -1017,7 +1017,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.2",
-  "updatedAt": "2019-10-25T01:41:26.858Z",
+  "updatedAt": "2019-10-27T20:48:45.337Z",
   "devdoc": {
     "methods": {},
     "title": "simple interface for Kyber Network "

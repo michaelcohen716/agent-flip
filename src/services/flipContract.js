@@ -5,12 +5,18 @@ const infuraRopstenUrl =
   "https://ropsten.infura.io/v3/b520d227f8e1479ab2bf09aebb9ea6db";
 
 const web3 = new Web3(window.web3.currentProvider);
-// const web3 = new Web3(new Web3.providers.HttpProvider(window.web3.currentProvider));
 
-const AGENT_FLIP_ROPSTEN = "0x6cb0D7a91ED3adaeF5ed96eAC92F048Ed29FA8B1";
+const AGENT_FLIP_ROPSTEN = "0x0e1aB9048bE836226a88B8f9f231901Cdd18BA40";
 
 async function FlipAgent() {
   return await new web3.eth.Contract(AgentFlip.abi, AGENT_FLIP_ROPSTEN);
+}
+
+export async function approveERC20() {
+  const contr = await FlipAgent();
+  await contr.methods.approveERC20("0x3dff0dce5fc4b367ec91d31de3837cf3840c8284").send({
+    from: web3.eth.accounts.givenProvider.selectedAddress
+  })
 }
 
 export async function swapEthForSbtc() {
@@ -39,4 +45,21 @@ export async function swapEthForIbtc() {
   });
 
   console.log("received amt", receivedAmount);
+}
+
+export async function ethToWbtc(){
+  const contr = await FlipAgent();
+
+  await contr.methods.ethToWbtc().send({
+    value: web3.utils.toWei("0.1", "ether"),
+    from: web3.eth.accounts.givenProvider.selectedAddress
+  })
+}
+
+export async function wbtcToEth(){
+  const contr = await FlipAgent();
+
+  await contr.methods.wbtcToEth("50000").send({
+    from: web3.eth.accounts.givenProvider.selectedAddress
+  })
 }

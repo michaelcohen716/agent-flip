@@ -56,7 +56,7 @@ class Admin extends React.Component {
 
   tradeSethForEth = async () => {
     const { pk } = this.state;
-    await sethForEth("0.08", pk);
+    await sethForEth("0.6", pk);
   };
 
   tradeEthForSbtc = async () => {

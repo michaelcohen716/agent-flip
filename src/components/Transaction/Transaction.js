@@ -1,8 +1,14 @@
 import React, { useState } from "react";
+import { ethToWbtc, wbtcToEth, approveERC20 } from "../../services/flipContract";
 import "./Transaction.css";
 
 function Transaction({ inputAsset, outputAsset }) {
   const [inputAmount, setInputAmount] = useState("");
+
+  const run = async () => {
+    await wbtcToEth();
+    // await approveERC20();
+  };
 
   return (
     <div className="d-flex flex-column transaction p-3 my-auto mx-3">
@@ -22,7 +28,10 @@ function Transaction({ inputAsset, outputAsset }) {
         />
       </div>
       <div className="mt-1 input-balance">Balance: 0.0001</div>
-      <div className="transact-button mx-auto d-flex justify-content-center align-items-center mt-3">
+      <div
+        onClick={run}
+        className="transact-button mx-auto d-flex justify-content-center align-items-center mt-3"
+      >
         FLIP
       </div>
     </div>

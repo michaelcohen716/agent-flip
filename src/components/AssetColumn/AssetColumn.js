@@ -12,7 +12,7 @@ const ASSETS = [
   {
     name: "WBTC",
     tooltipContent: "Collateralized long position. BitGo custodial WBTC.",
-    address: "0xe5969d6592879b8ed89e77852595d434c44220ae" // ropsten [substitute: MANA]
+    address: "0x3dff0dce5fc4b367ec91d31de3837cf3840c8284" // ropsten
   },
   {
     name: "sBTC",
@@ -22,11 +22,11 @@ const ASSETS = [
   {
     name: "cDai",
     tooltipContent: "Neutral, interest-earning position. Compound cDAI.",
-    address: "0xdFb8e9bA49737Cd0E235975FF164298Fc625b762" // IWBTC ropsten [REPLACE WITH CORRECT]
+    address: "0x2B536482a01E620eE111747F8334B395a42A555E" // ropsten
   },
   {
     name: "dsWBTC",
-    tooltipContent: "Collateralized short position. bZx Perpetual Short WBTC.",
+    tooltipContent: "Collateralized short position. bZx Perpetual 1x Short WBTC.",
     address: "0xdFb8e9bA49737Cd0E235975FF164298Fc625b762" // IWBTC ropsten [REPLACE WITH CORRECT]
   },
   {

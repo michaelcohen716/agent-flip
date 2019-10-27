@@ -29,7 +29,7 @@ function AssetItem({
         bal = await erc20.methods.balanceOf(addr).call();
       }
 
-      bal = (bal / 10 ** 18).toFixed(4);
+      bal = name === "WBTC" ? (bal / 10 ** 8).toFixed(4) : (bal / 10 ** 18).toFixed(4);
       setBalance(bal);
     };
     getBalance();
