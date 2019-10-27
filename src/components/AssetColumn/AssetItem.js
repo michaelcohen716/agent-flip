@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import TooltipLite from "react-tooltip-lite";
-import getWeb3 from "../../getWeb3";
-import { ERC20Contract } from "../../services/uniswap";
+import { getTokenBalance, web3 } from "../../services/erc20";
+import useGetBalance from "../../hooks/useGetBalance";
 import "./Column.css";
 
 function AssetItem({
@@ -13,27 +13,7 @@ function AssetItem({
   isInactive,
   setAsset
 }) {
-  const [balance, setBalance] = useState("");
-
-  useEffect(() => {
-    const getBalance = async () => {
-      const web3 = await getWeb3();
-      const addr = web3.eth.accounts.givenProvider.selectedAddress;
-      let bal;
-
-      if (name === "ETH") {
-        bal = await web3.eth.getBalance(addr);
-      } else {
-        const erc20 = await ERC20Contract(address);
-
-        bal = await erc20.methods.balanceOf(addr).call();
-      }
-
-      bal = name === "WBTC" ? (bal / 10 ** 8).toFixed(4) : (bal / 10 ** 18).toFixed(4);
-      setBalance(bal);
-    };
-    getBalance();
-  });
+  const { balance } = useGetBalance(address, name);
 
   const getItemClass = () => {
     if (isSelected) {

@@ -98,12 +98,6 @@ contract AgentFlip {
     *
     **/
 
-    function approveERC20(address _erc20) public {
-        ERC20 token = ERC20(_erc20);
-        require(token.approve(address(this), UINT256_MAX));
-        require(token.approve(address(kyberNetworkProxyContract), UINT256_MAX));
-    }
-
     function ethToWbtc() public payable {
         uint minConversionRate;
         ERC20 token = ERC20(wbtc);

@@ -7,7 +7,7 @@ import {
   ethForSeth
 } from "../services/uniswap";
 import AgentFlip from "../contracts/AgentFlip.json";
-import { swapEthForSbtc, swapEthForIbtc } from "../services/flipContract";
+import { ethToSbtc, ethToIbtc } from "../services/flipContract";
 import getWeb3 from "../getWeb3";
 
 const AGENT_FLIP_ROPSTEN = "0x0D92DfC09d019e5a0CdBCC6C437f9B860349c571";
@@ -60,11 +60,11 @@ class Admin extends React.Component {
   };
 
   tradeEthForSbtc = async () => {
-    await swapEthForSbtc();
+    await ethToSbtc()
   };
 
   tradeEthForIbtc = async () => {
-    await swapEthForIbtc();
+    await ethToIbtc();
   };
 
   componentDidMount = async () => {

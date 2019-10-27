@@ -23,7 +23,7 @@ function Base() {
           </div>
           <div className="d-flex mr-2">
             <img src={detective} className="img-fluid detective" />
-            <div className="font-weight-bold">Agent Flip</div>
+            <div className="font-weight-bold agent-flip">Agent Flip</div>
           </div>
         </div>
         <div className="d-flex">

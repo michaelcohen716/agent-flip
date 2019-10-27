@@ -6,7 +6,7 @@ const infuraRopstenUrl =
 
 const web3 = new Web3(window.web3.currentProvider);
 
-const AGENT_FLIP_ROPSTEN = "0x0e1aB9048bE836226a88B8f9f231901Cdd18BA40";
+export const AGENT_FLIP_ROPSTEN = "0x0e1aB9048bE836226a88B8f9f231901Cdd18BA40";
 
 async function FlipAgent() {
   return await new web3.eth.Contract(AgentFlip.abi, AGENT_FLIP_ROPSTEN);
@@ -19,7 +19,7 @@ export async function approveERC20() {
   })
 }
 
-export async function swapEthForSbtc() {
+export async function ethToSbtc() {
   const contr = await FlipAgent();
 
   const DEADLINE_FROM_NOW = 60 * 15;
@@ -33,7 +33,7 @@ export async function swapEthForSbtc() {
   console.log("received amt", receivedAmount);
 }
 
-export async function swapEthForIbtc() {
+export async function ethToIbtc() {
   const contr = await FlipAgent();
 
   const DEADLINE_FROM_NOW = 60 * 15;
@@ -59,7 +59,7 @@ export async function ethToWbtc(){
 export async function wbtcToEth(){
   const contr = await FlipAgent();
 
-  await contr.methods.wbtcToEth("50000").send({
+  await contr.methods.wbtcToEth("10000").send({
     from: web3.eth.accounts.givenProvider.selectedAddress
   })
 }
