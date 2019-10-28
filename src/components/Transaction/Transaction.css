@@ -47,3 +47,9 @@
   letter-spacing: 1px;
   font-weight: bold;
 }
+
+.tx-success {
+  color: green;
+  font-size: 14px;
+  margin-top: 6px;
+}

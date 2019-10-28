@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getTokenBalance } from "../services/erc20";
 import Web3 from "web3";
 
-function useGetBalance(address, name) {
+function useGetBalance(address, name, force) {
   const [balance, setBalance] = useState("");
 
   useEffect(() => {
@@ -32,10 +32,9 @@ function useGetBalance(address, name) {
       setBalance(bal);
     };
     if(window.ethereum){
-      console.log('window.eth', window.ethereum)
       getBalance();
     }
-  }, []);
+  }, [force]);
 
   return {
     balance

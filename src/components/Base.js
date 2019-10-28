@@ -24,13 +24,15 @@ function Base() {
   const [networkId, setNetworkId] = useState("")
   const [introState, setIntroState] = useState(2);
   // const [introState, setIntroState] = useState(0);
+  const [force, setForce] = useState(false);
+
+  const forceRerender = () => setForce(!force);
 
   let web3, netId;
   useEffect(() => {
   if(window.ethereum){
     web3 = new Web3(window.ethereum);
     netId = window.ethereum.networkVersion;
-    console.log('netid', netId)
     setNetworkId(netId);
   }
 
@@ -82,8 +84,9 @@ function Base() {
           isInput={true}
           setAsset={setInputAsset}
           selectedAsset={inputAsset}
+          force={force}
         />
-        <Transaction inputAsset={inputAsset} outputAsset={outputAsset} />
+        <Transaction inputAsset={inputAsset} outputAsset={outputAsset} forceRerender={forceRerender} />
         <AssetColumn
           headline="Output"
           isInactive={!inputAsset}

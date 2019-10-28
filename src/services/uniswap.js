@@ -24,11 +24,17 @@ export async function ExchangeContract() {
   );
 }
 
+
 export async function ERC20Contract(address) {
-  return await new web3.eth.Contract(
-    ERC20,
-    address
-  )
+  let provider = ethers.getDefaultProvider('ropsten');
+  // let signer = provider.getSigner(0)
+  console.log('provider', provider)
+  let contract = new ethers.Contract(address, ERC20, provider);
+  return contract;
+  // return await new web3.eth.Contract(
+  //   ERC20,
+  //   address
+  // )
 }
 
 async function TokenContract() {

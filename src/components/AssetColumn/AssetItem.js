@@ -11,9 +11,10 @@ function AssetItem({
   address,
   isSelected,
   isInactive,
-  setAsset
+  setAsset,
+  force
 }) {
-  const { balance } = useGetBalance(address, name);
+  const { balance } = useGetBalance(address, name, force);
 
   const getItemClass = () => {
     if (isSelected) {

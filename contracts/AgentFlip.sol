@@ -249,6 +249,7 @@ contract AgentFlip {
         require (synContract.exchange (sEthCurrencyKey, sEthAmt, sBtcCurrencyKey, address(this)));
 
         require (ERC20(proxySbtc).transfer(msg.sender, receivedAmt));
+        Flip(msg.sender, receivedAmt, sBtcCurrencyKey);
     }
 
     function swapEthForIbtc(uint deadline) public payable returns(uint receivedAmt) {
@@ -262,6 +263,7 @@ contract AgentFlip {
         require (synContract.exchange (sEthCurrencyKey, sEthAmt, iBtcCurrencyKey, address(this)));
 
         require (ERC20(proxyIbtc).transfer(msg.sender, receivedAmt));
+        Flip(msg.sender, receivedAmt, iBtcCurrencyKey);
     }
 
  
@@ -288,6 +290,8 @@ contract AgentFlip {
 
         ERC20(proxySeth).approve(uniswapSethExchange, sethReceived);
         uniContract.tokenToEthTransferInput(sethReceived, 1, deadline, msg.sender);
+
+        Flip(msg.sender, sethReceived, "ETH");
     }
 
     function ibtcToEth(uint ibtcToSell, uint deadline) public returns(uint ethBought) {
@@ -300,6 +304,7 @@ contract AgentFlip {
 
         ERC20(proxySeth).approve(uniswapSethExchange, sethReceived);
         ethBought = uniContract.tokenToEthTransferInput(sethReceived, 1, deadline, msg.sender);
+        Flip(msg.sender, sethReceived, "ETH");
     }
 
 
@@ -327,6 +332,7 @@ contract AgentFlip {
         require (synContract.exchange (sEthCurrencyKey, sEthAmt, sBtcCurrencyKey, address(this)));
 
         require (ERC20(proxySbtc).transfer(msg.sender, receivedAmt));
+        Flip(msg.sender, receivedAmt, sBtcCurrencyKey);
     }
 
     function sbtcToWbtc(uint sbtcToSell, uint deadline) public {
@@ -348,6 +354,7 @@ contract AgentFlip {
 
         uint destAmount = kyberNetworkProxyContract.swapEtherToToken.value(ethBought)(token, minConversionRate);
         token.transfer(destAddress, destAmount);
+        Flip(msg.sender, destAmount, "WBTC");
     }
 
     function sbtcToIbtc(uint sbtcToSell) public {
@@ -378,6 +385,7 @@ contract AgentFlip {
         require (synContract.exchange (sEthCurrencyKey, sEthAmt, iBtcCurrencyKey, address(this)));
 
         require (ERC20(proxyIbtc).transfer(msg.sender, receivedAmt));
+        Flip(msg.sender, receivedAmt, iBtcCurrencyKey);
     }
     /*  */
 

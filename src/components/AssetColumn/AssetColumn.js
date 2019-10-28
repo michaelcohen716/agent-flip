@@ -10,7 +10,8 @@ function AssetColumn({
   isInactive,
   setAsset,
   selectedAsset,
-  selectedInputAsset
+  selectedInputAsset,
+  force
 }) {
   return (
     <div className="d-flex flex-column asset-column mt-3 p-3">
@@ -34,6 +35,7 @@ function AssetColumn({
                 (!isInput && !functionMap[selectedInputAsset][name])
               }
               isSelected={name === selectedAsset}
+              force={force}
               key={i}
             />
           );

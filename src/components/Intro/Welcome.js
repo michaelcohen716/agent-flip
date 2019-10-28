@@ -4,7 +4,6 @@ import "./Intro.css";
 
 function Welcome({ setIntroState, injectedWeb3 }) {
   const connect = async () => {
-    console.log('injected web3', injectedWeb3)
     if(injectedWeb3){
       await window.ethereum.enable();
       setIntroState(1);

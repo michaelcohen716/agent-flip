@@ -20,25 +20,6 @@ class Admin extends React.Component {
     pk: "1E25C8731DE51F919A23EF70749251BB4F57D80BFD6468FC450FD79D39E3B87C"
   };
 
-  //   kyber
-  // trade = async () => {
-  //   const { accounts, web3 } = this.state;
-  //   let maxDest = new BN(1000000);
-  //   //   console.log('max dest', maxDest)
-  //   maxDest = web3.utils.toWei(maxDest);
-  //   //   console.log('max dest', maxDest)
-  //   const retVal = await this.state.contract.methods
-  //     .executeSwap(
-  //       "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
-  //       "1000000000000000000",
-  //       "0xad6d458402f60fd3bd25163575031acdce07538d",
-  //       "0xd01ae9c9da06bcb259803341a61af7a516645a32",
-  //       maxDest
-  //     )
-  //     .send({ from: accounts[0] });
-  //   console.log("retval", retVal);
-  // };
-
   createExchange = async () => {
     const { pk } = this.state;
     await createTokenExchange(pk);
