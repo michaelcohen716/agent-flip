@@ -98,10 +98,10 @@ function Transaction({ inputAsset, outputAsset, forceRerender }) {
 
   const run = async () => {
     if(!inputAsset) return;
-    setTxProcessing(true)
     setTxSuccess(false);
 
     if (isApproved()) {
+      setTxProcessing(true)
       // run
       if (inputAsset.length > 0 && outputAsset.length > 0) {
         const func = functionMap[inputAsset][outputAsset];
@@ -122,6 +122,8 @@ function Transaction({ inputAsset, outputAsset, forceRerender }) {
       }
     } else {
       if (inputAsset) {
+        setTxProcessing(true)
+
         if(inputAsset === "ETH") return;
         increaseAllowance();
         const contr = await ERC20Contract(assetToAddress(inputAsset));
@@ -135,7 +137,6 @@ function Transaction({ inputAsset, outputAsset, forceRerender }) {
         })
       }
     }
-    setTxProcessing(false)
   };
 
   return (
