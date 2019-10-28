@@ -17,9 +17,10 @@ import {
 import { getTokenAllowance, setTokenAllowance } from "../../services/erc20";
 import { assetToAddress } from "../../utils/assets";
 import useGetBalance from "../../hooks/useGetBalance";
+import Web3 from "web3";
 import "./Transaction.css";
 
-const functionMap = {
+export const functionMap = {
   ETH: {
     WBTC: ethToWbtc,
     sBTC: ethToSbtc,
@@ -41,6 +42,13 @@ const functionMap = {
     dsWBTC: null,
     iBTC: null //sbtcToIbtc...failing
   },
+  cDai: {
+    ETH: null,
+    WBTC: null,
+    cDai: null, 
+    dsWBTC: null,
+    sBTC: null
+  },
   iBTC: {
     ETH: ibtcToEth,
     WBTC: null,
@@ -54,9 +62,11 @@ function Transaction({ inputAsset, outputAsset }) {
   const [inputAmount, setInputAmount] = useState("");
   const [allowance, setAllowance] = useState("");
   const { balance } = useGetBalance(assetToAddress(inputAsset), inputAsset);
-
+  console.log('balance', balance)
   useEffect(() => {
     const getAllowance = async () => {
+      const web3 = new Web3(window.ethereum);
+
       if (inputAsset !== "ETH" && !!inputAsset) {
         const allowance = await getTokenAllowance(assetToAddress(inputAsset));
         setAllowance(allowance);
@@ -82,7 +92,7 @@ function Transaction({ inputAsset, outputAsset }) {
       if (inputAsset && outputAsset) {
         const func = functionMap[inputAsset][outputAsset];
         console.log("func", func);
-        func()
+        func(inputAmount)
       }
     } else {
       if (inputAsset) {
@@ -108,7 +118,7 @@ function Transaction({ inputAsset, outputAsset }) {
           placeholder="Input amount"
         />
       </div>
-      <div className="mt-1 input-balance">Balance: {balance}</div>
+      <div className="mt-1 input-balance">Input validations coming soon</div>
       <div
         onClick={run}
         className="transact-button mx-auto d-flex justify-content-center align-items-center mt-3"

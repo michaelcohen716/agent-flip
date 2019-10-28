@@ -1,6 +1,7 @@
 import React from "react";
 import AssetItem from "./AssetItem";
 import { ASSETS } from "../../utils/assets";
+import { functionMap } from "../Transaction/Transaction";
 import "./Column.css";
 
 function AssetColumn({
@@ -28,7 +29,9 @@ function AssetColumn({
               isInactive={
                 isInactive ||
                 (!isInput && name === selectedInputAsset) ||
-                name === "dsWBTC"
+                name === "dsWBTC" ||
+                name === "cDai" ||
+                (!isInput && !functionMap[selectedInputAsset][name])
               }
               isSelected={name === selectedAsset}
               key={i}
