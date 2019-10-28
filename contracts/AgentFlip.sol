@@ -120,11 +120,9 @@ contract AgentFlip {
        
         require(token.approve(address(kyberNetworkProxyContract), wbtcToSell));
         
-
         (minConversionRate,) = kyberNetworkProxyContract.getExpectedRate(token, ETH_TOKEN_ADDRESS, wbtcToSell);
 
         uint destAmount = kyberNetworkProxyContract.swapTokenToEther(token, wbtcToSell, minConversionRate);
-        // require(token.transfer(msg.sender, destAmount));
         destAddress.transfer(destAmount);
         
         bytes32 asset = "ETH";
@@ -270,7 +268,56 @@ contract AgentFlip {
     }
 
     /* Two step functions */
+    function wbtcToSbtc(uint wbtcToSell, uint deadline) public {
+        uint minConversionRate;
+        ERC20 token = ERC20(wbtc);
+        address destAddress = msg.sender;
 
+        require(token.approve(address(kyberNetworkProxyContract), wbtcToSell));
+        require(token.transferFrom(destAddress, address(this), wbtcToSell));
+        
+        require(token.approve(address(kyberNetworkProxyContract), wbtcToSell));
+        (minConversionRate,) = kyberNetworkProxyContract.getExpectedRate(token, ETH_TOKEN_ADDRESS, wbtcToSell);
+
+        uint ethAmount = kyberNetworkProxyContract.swapTokenToEther(token, wbtcToSell, minConversionRate);
+
+        UniswapExchangeInterface uniContract = UniswapExchangeInterface(uniswapSethExchange);
+        ERC20(sethERC20).approve(uniswapSethExchange, UINT256_MAX);
+        uint sEthAmt = uniContract.ethToTokenSwapInput.value(ethAmount)(1, deadline);
+
+        uint receivedAmt = _synthReceived(sEthAmt, sEthCurrencyKey, sBtcCurrencyKey);
+
+        ISynthetix synContract = ISynthetix(proxySynthetix);
+        require (synContract.exchange (sEthCurrencyKey, sEthAmt, sBtcCurrencyKey, address(this)));
+
+        require (ERC20(proxySbtc).transfer(msg.sender, receivedAmt));
+
+    }
+
+    function wbtcToIbtc(uint wbtcToSell, uint deadline) public {
+        uint minConversionRate;
+        ERC20 token = ERC20(wbtc);
+        address destAddress = msg.sender;
+
+        require(token.approve(address(kyberNetworkProxyContract), wbtcToSell));
+        require(token.transferFrom(destAddress, address(this), wbtcToSell));
+
+        require(token.approve(address(kyberNetworkProxyContract), wbtcToSell));
+        (minConversionRate,) = kyberNetworkProxyContract.getExpectedRate(token, ETH_TOKEN_ADDRESS, wbtcToSell);
+
+        uint ethAmount = kyberNetworkProxyContract.swapTokenToEther(token, wbtcToSell, minConversionRate);
+
+        UniswapExchangeInterface uniContract = UniswapExchangeInterface(uniswapSethExchange);
+        ERC20(sethERC20).approve(uniswapSethExchange, UINT256_MAX);
+        uint sEthAmt = uniContract.ethToTokenSwapInput.value(ethAmount)(1, deadline);
+
+        uint receivedAmt = _synthReceived(sEthAmt, sEthCurrencyKey, iBtcCurrencyKey);
+
+        ISynthetix synContract = ISynthetix(proxySynthetix);
+        require (synContract.exchange (sEthCurrencyKey, sEthAmt, iBtcCurrencyKey, address(this)));
+
+        require (ERC20(proxyIbtc).transfer(msg.sender, receivedAmt));
+    }
     /*  */
 
 
@@ -304,4 +351,3 @@ contract AgentFlip {
     //Fallback function
     function() public payable {}
 }
-

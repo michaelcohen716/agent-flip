@@ -4,7 +4,9 @@ import {
   wbtcToEth,
   approveERC20,
   ethToSbtc,
-  ethToIbtc
+  ethToIbtc,
+  wbtcToSbtc,
+  wbtcToIbtc
 } from "../../services/flipContract";
 import { getTokenAllowance, setTokenAllowance } from "../../services/erc20";
 import { assetToAddress } from "../../utils/assets";
@@ -13,7 +15,6 @@ import "./Transaction.css";
 
 const functionMap = {
   ETH: {
-    // input
     WBTC: ethToWbtc,
     sBTC: ethToSbtc,
     cDai: null,
@@ -22,7 +23,7 @@ const functionMap = {
   },
   WBTC: {
     ETH: wbtcToEth, // approve needs to run first
-    sBTC: null,
+    sBTC: wbtcToSbtc,
     cDai: null,
     dsWBTC: null,
     iBTC: null
@@ -42,7 +43,6 @@ function Transaction({ inputAsset, outputAsset }) {
       }
     };
     getAllowance();
-
   }, [inputAsset]);
 
   const increaseAllowance = async () => {
@@ -55,11 +55,18 @@ function Transaction({ inputAsset, outputAsset }) {
     inputAsset === "ETH" ? true : allowance > 0 ? true : false;
 
   const run = async () => {
-    if (isApproved()) {
-      // run
-    } else {
-      increaseAllowance();
-    }
+      await wbtcToIbtc();
+    // if (isApproved()) {
+    //   // run
+    //   if (inputAsset && outputAsset) {
+    //     const func = functionMap[inputAsset][outputAsset];
+    //     console.log("func", func);
+    //   }
+    // } else {
+    //   if (inputAsset) {
+    //     increaseAllowance();
+    //   }
+    // }
   };
 
   return (
