@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ApproveNotice from "./ApproveNotice";
 import {
   ethToWbtc,
   wbtcToEth,
@@ -6,7 +7,10 @@ import {
   ethToSbtc,
   ethToIbtc,
   wbtcToSbtc,
-  wbtcToIbtc
+  wbtcToIbtc,
+  sbtcToEth,
+  sbtcToWbtc,
+  sbtcToIbtc
 } from "../../services/flipContract";
 import { getTokenAllowance, setTokenAllowance } from "../../services/erc20";
 import { assetToAddress } from "../../utils/assets";
@@ -22,11 +26,19 @@ const functionMap = {
     iBTC: ethToIbtc
   },
   WBTC: {
-    ETH: wbtcToEth, // approve needs to run first
+    // approve needs to run first
+    ETH: wbtcToEth, 
     sBTC: wbtcToSbtc,
     cDai: null,
     dsWBTC: null,
-    iBTC: null
+    iBTC: wbtcToIbtc
+  },
+  sBTC: {
+    ETH: sbtcToEth, 
+    WBTC: null, //sbtcToWbtc...failing
+    cDai: null,
+    dsWBTC: null,
+    iBTC: sbtcToIbtc
   }
 };
 
@@ -40,6 +52,8 @@ function Transaction({ inputAsset, outputAsset }) {
       if (inputAsset !== "ETH" && !!inputAsset) {
         const allowance = await getTokenAllowance(assetToAddress(inputAsset));
         setAllowance(allowance);
+        console.log('inputamount', inputAmount)
+        console.log('allowance', allowance)
       }
     };
     getAllowance();
@@ -47,7 +61,7 @@ function Transaction({ inputAsset, outputAsset }) {
 
   const increaseAllowance = async () => {
     if (inputAsset) {
-      await setTokenAllowance(assetToAddress(inputAsset), 5000);
+      await setTokenAllowance(assetToAddress(inputAsset));
     }
   };
 
@@ -55,18 +69,18 @@ function Transaction({ inputAsset, outputAsset }) {
     inputAsset === "ETH" ? true : allowance > 0 ? true : false;
 
   const run = async () => {
-      await wbtcToIbtc();
-    // if (isApproved()) {
-    //   // run
-    //   if (inputAsset && outputAsset) {
-    //     const func = functionMap[inputAsset][outputAsset];
-    //     console.log("func", func);
-    //   }
-    // } else {
-    //   if (inputAsset) {
-    //     increaseAllowance();
-    //   }
-    // }
+    if (isApproved()) {
+      // run
+      if (inputAsset && outputAsset) {
+        const func = functionMap[inputAsset][outputAsset];
+        console.log("func", func);
+        func()
+      }
+    } else {
+      if (inputAsset) {
+        increaseAllowance();
+      }
+    }
   };
 
   return (
@@ -93,6 +107,10 @@ function Transaction({ inputAsset, outputAsset }) {
       >
         {!!inputAsset ? (isApproved() ? "FLIP" : "APPROVE") : "FLIP"}
       </div>
+      {!!inputAsset && !isApproved() && (
+        <ApproveNotice assetName={inputAsset} />
+
+      )}
     </div>
   );
 }

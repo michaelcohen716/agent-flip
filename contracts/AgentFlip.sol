@@ -16,6 +16,8 @@ interface UniswapExchangeInterface {
     function ethToTokenSwapOutput(uint, uint) external payable returns (uint);
     function tokenToEthTransferInput(uint, uint, uint, address) external returns (uint);
     function tokenToEthTransferOutput(uint, uint, uint, address) external returns (uint);
+    function tokenToEthSwapInput(uint, uint, uint) external returns(uint);
+    function tokenToEthSwapOutput(uint, uint, uint) external returns(uint);
     function addLiquidity(uint, uint,uint) external payable returns(uint);
 }
 
@@ -60,6 +62,7 @@ contract AgentFlip {
 
     address public wbtc = 0x3dff0dce5fc4b367ec91d31de3837cf3840c8284;
     address public proxySbtc = 0xC1701AbD559FC263829CA3917d03045F95b5224A;
+    address public proxySeth = 0x0Df1B6d92feBCA3B2793AfA3649868991CC4901D;
     address public proxyIbtc = 0xdFb8e9bA49737Cd0E235975FF164298Fc625b762;
     address public sethERC20 = 0x0df1b6d92febca3b2793afa3649868991cc4901d;
     ERC20 constant internal ETH_TOKEN_ADDRESS = ERC20(0x00eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee);
@@ -257,14 +260,16 @@ contract AgentFlip {
     }
 
     /* Reverse functions */
-    function swapSbtcForEth(uint sbtcToSell, uint deadline) public returns(uint ethBought) {
+    function sbtcToEth(uint sbtcToSell, uint deadline) public {
         UniswapExchangeInterface uniContract = UniswapExchangeInterface(uniswapSethExchange);
         ISynthetix synContract = ISynthetix(proxySynthetix);
 
         uint sethReceived = _synthReceived(sbtcToSell, sBtcCurrencyKey, sEthCurrencyKey);
+        require(ERC20(proxySbtc).transferFrom(msg.sender, address(this), sbtcToSell));
         require (synContract.exchange (sBtcCurrencyKey, sbtcToSell, sEthCurrencyKey, address(this)));
 
-        ethBought = uniContract.tokenToEthTransferInput(sethReceived, 0, deadline, msg.sender);
+        ERC20(proxySeth).approve(uniswapSethExchange, sethReceived);
+        uniContract.tokenToEthTransferInput(sethReceived, 1, deadline, msg.sender);
     }
 
     /* Two step functions */
@@ -291,7 +296,32 @@ contract AgentFlip {
         require (synContract.exchange (sEthCurrencyKey, sEthAmt, sBtcCurrencyKey, address(this)));
 
         require (ERC20(proxySbtc).transfer(msg.sender, receivedAmt));
+    }
 
+    function sbtcToWbtc(uint sbtcToSell, uint deadline) public {
+        UniswapExchangeInterface uniContract = UniswapExchangeInterface(uniswapSethExchange);
+        ISynthetix synContract = ISynthetix(proxySynthetix);
+        address destAddress = msg.sender;
+
+        uint sethReceived = _synthReceived(sbtcToSell, sBtcCurrencyKey, sEthCurrencyKey);
+        require(ERC20(proxySbtc).transferFrom(msg.sender, address(this), sbtcToSell));
+        require (synContract.exchange (sBtcCurrencyKey, sbtcToSell, sEthCurrencyKey, address(this)));
+
+        ERC20(proxySeth).approve(uniswapSethExchange, sethReceived);
+
+        uint ethBought = uniContract.tokenToEthSwapInput(sethReceived, 1, deadline);
+
+        ERC20 token = ERC20(wbtc);
+        uint minConversionRate;
+        (, minConversionRate) = kyberNetworkProxyContract.getExpectedRate(ETH_TOKEN_ADDRESS, token, ethBought);
+
+        uint destAmount = kyberNetworkProxyContract.swapEtherToToken.value(ethBought)(token, minConversionRate);
+        token.transfer(destAddress, destAmount);
+    }
+
+    function sbtcToIbtc(uint sbtcToSell) public {
+        ISynthetix synContract = ISynthetix(proxySynthetix);
+        require (synContract.exchange (sBtcCurrencyKey, sbtcToSell, iBtcCurrencyKey, msg.sender));
     }
 
     function wbtcToIbtc(uint wbtcToSell, uint deadline) public {

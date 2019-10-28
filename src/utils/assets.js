@@ -24,7 +24,7 @@ export const ASSETS = [
     name: "dsWBTC",
     tooltipContent:
       "Collateralized short position. bZx Perpetual 1x Short WBTC.",
-    address: "0xdFb8e9bA49737Cd0E235975FF164298Fc625b762" // IWBTC ropsten [REPLACE WITH CORRECT]
+    address: "0xc241f48dAfa9C2ab4a6e6E41Ffc8cc491cBcf3c5" // bZx WBTC iToken (iWBTC) ropsten [REPLACE WITH CORRECT]
   },
   {
     name: "iBTC",

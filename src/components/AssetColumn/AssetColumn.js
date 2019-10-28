@@ -26,7 +26,9 @@ function AssetColumn({
               tooltipContent={tooltipContent}
               address={address}
               isInactive={
-                isInactive || (!isInput && name === selectedInputAsset)
+                isInactive ||
+                (!isInput && name === selectedInputAsset) ||
+                name === "dsWBTC"
               }
               isSelected={name === selectedAsset}
               key={i}
