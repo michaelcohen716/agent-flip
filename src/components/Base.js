@@ -22,8 +22,7 @@ function Base() {
   const [inputAsset, setInputAsset] = useState("");
   const [outputAsset, setOutputAsset] = useState("");
   const [networkId, setNetworkId] = useState("")
-  const [introState, setIntroState] = useState(2);
-  // const [introState, setIntroState] = useState(0);
+  const [introState, setIntroState] = useState(0);
   const [force, setForce] = useState(false);
 
   const forceRerender = () => setForce(!force);
@@ -54,7 +53,6 @@ function Base() {
       </Holder>
     )
   }
-
 
 
   return (
