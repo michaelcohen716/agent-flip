@@ -110,8 +110,19 @@ function Transaction({ inputAsset, outputAsset, forceRerender }) {
         const token = inputAsset === "ETH" ? outputAsset : inputAsset;
         console.log('token', token)
 
-        const contr = await ERC20Contract(assetToAddress(token));
+        // seth
+        const contr = await ERC20Contract("0x0Df1B6d92feBCA3B2793AfA3649868991CC4901D");
         contr.on("Transfer", (a, b, c) => {
+          setTxProcessing(false);
+          setTxSuccess(true);
+          setInterval(() => {
+            forceRerender();
+          }, 1000);
+        })
+
+        // wbtc
+        const contr2 = await ERC20Contract("0x3dff0dce5fc4b367ec91d31de3837cf3840c8284")
+        contr2.on("Transfer", (a, b, c) => {
           setTxProcessing(false);
           setTxSuccess(true);
           setInterval(() => {
