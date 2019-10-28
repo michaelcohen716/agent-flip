@@ -32,7 +32,7 @@
 
 .input-balance {
   font-size: 10px;
-  color: gray;
+  color: green;
   text-align: center;
 }
 
@@ -46,4 +46,10 @@
   cursor: pointer;
   letter-spacing: 1px;
   font-weight: bold;
+}
+
+.tx-success {
+  color: green;
+  font-size: 14px;
+  margin-top: 6px;
 }

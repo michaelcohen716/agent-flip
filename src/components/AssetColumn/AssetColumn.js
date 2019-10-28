@@ -1,6 +1,7 @@
 import React from "react";
 import AssetItem from "./AssetItem";
 import { ASSETS } from "../../utils/assets";
+import { functionMap } from "../Transaction/Transaction";
 import "./Column.css";
 
 function AssetColumn({
@@ -9,7 +10,8 @@ function AssetColumn({
   isInactive,
   setAsset,
   selectedAsset,
-  selectedInputAsset
+  selectedInputAsset,
+  force
 }) {
   return (
     <div className="d-flex flex-column asset-column mt-3 p-3">
@@ -28,9 +30,12 @@ function AssetColumn({
               isInactive={
                 isInactive ||
                 (!isInput && name === selectedInputAsset) ||
-                name === "dsWBTC"
+                name === "dsWBTC" ||
+                name === "cDai" ||
+                (!isInput && !functionMap[selectedInputAsset][name])
               }
               isSelected={name === selectedAsset}
+              force={force}
               key={i}
             />
           );

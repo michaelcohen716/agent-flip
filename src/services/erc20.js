@@ -2,10 +2,19 @@ import ERC20 from "../abis/ERC20.json";
 import Web3 from "web3";
 import { AGENT_FLIP_ROPSTEN } from "./flipContract";
 import { assetToAddress } from "../utils/assets";
-import { ERC20Contract } from "./uniswap";
 import BN from "bn.js";
 
-export const web3 = new Web3(window.web3.currentProvider);
+let web3;
+if(window.ethereum){
+  web3 = new Web3(window.ethereum)
+}
+
+export async function ERC20Contract(address) {
+  return await new web3.eth.Contract(
+    ERC20,
+    address
+  )
+}
 
 export async function getTokenAllowance(tokenAddress) {
   const contr = await new web3.eth.Contract(ERC20, tokenAddress);

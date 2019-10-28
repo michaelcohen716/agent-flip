@@ -5,7 +5,7 @@ import Web3Provider, { Connectors } from "web3-react";
 import "./App.css";
 
 const { InjectedConnector } = Connectors;
-const MetaMask = new InjectedConnector({ supportedNetworks: [4] });
+const MetaMask = new InjectedConnector({ supportedNetworks: [3] });
 const connectors = { MetaMask };
 
 class App extends React.Component {

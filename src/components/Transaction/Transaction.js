@@ -10,23 +10,27 @@ import {
   wbtcToIbtc,
   sbtcToEth,
   sbtcToWbtc,
-  sbtcToIbtc
+  sbtcToIbtc,
+  ethToCdai,
+  ibtcToEth,
+  FlipAgentEthers
 } from "../../services/flipContract";
 import { getTokenAllowance, setTokenAllowance } from "../../services/erc20";
+import { ERC20Contract } from "../../services/uniswap";
 import { assetToAddress } from "../../utils/assets";
 import useGetBalance from "../../hooks/useGetBalance";
+import Web3 from "web3";
 import "./Transaction.css";
 
-const functionMap = {
+export const functionMap = {
   ETH: {
     WBTC: ethToWbtc,
     sBTC: ethToSbtc,
-    cDai: null,
+    cDai: ethToCdai,
     dsWBTC: null,
     iBTC: ethToIbtc
   },
   WBTC: {
-    // approve needs to run first
     ETH: wbtcToEth, 
     sBTC: wbtcToSbtc,
     cDai: null,
@@ -38,22 +42,39 @@ const functionMap = {
     WBTC: null, //sbtcToWbtc...failing
     cDai: null,
     dsWBTC: null,
-    iBTC: sbtcToIbtc
+    iBTC: null //sbtcToIbtc...failing
+  },
+  cDai: {
+    ETH: null,
+    WBTC: null,
+    cDai: null, 
+    dsWBTC: null,
+    sBTC: null
+  },
+  iBTC: {
+    ETH: ibtcToEth,
+    WBTC: null,
+    cDai: null, 
+    dsWBTC: null,
+    sBTC: null
   }
 };
 
-function Transaction({ inputAsset, outputAsset }) {
+function Transaction({ inputAsset, outputAsset, forceRerender }) {
   const [inputAmount, setInputAmount] = useState("");
   const [allowance, setAllowance] = useState("");
+  const [txProcessing, setTxProcessing] = useState(false);
+  const [txSuccess, setTxSuccess] = useState(false)
   const { balance } = useGetBalance(assetToAddress(inputAsset), inputAsset);
+
+  const web3 = new Web3(window.ethereum); 
 
   useEffect(() => {
     const getAllowance = async () => {
+       
       if (inputAsset !== "ETH" && !!inputAsset) {
         const allowance = await getTokenAllowance(assetToAddress(inputAsset));
         setAllowance(allowance);
-        console.log('inputamount', inputAmount)
-        console.log('allowance', allowance)
       }
     };
     getAllowance();
@@ -68,19 +89,53 @@ function Transaction({ inputAsset, outputAsset }) {
   const isApproved = () =>
     inputAsset === "ETH" ? true : allowance > 0 ? true : false;
 
+  const getAllowance = async () => {
+    if (inputAsset !== "ETH" && !!inputAsset) {
+      const allowance = await getTokenAllowance(assetToAddress(inputAsset));
+      setAllowance(allowance);
+    }
+  };  
+
   const run = async () => {
+    if(!inputAsset) return;
+    setTxProcessing(true)
+    setTxSuccess(false);
+
     if (isApproved()) {
       // run
-      if (inputAsset && outputAsset) {
+      if (inputAsset.length > 0 && outputAsset.length > 0) {
         const func = functionMap[inputAsset][outputAsset];
-        console.log("func", func);
-        func()
+        await func(inputAmount);
+
+        const token = inputAsset === "ETH" ? outputAsset : inputAsset;
+        console.log('token', token)
+
+        const contr = await ERC20Contract(assetToAddress(token));
+        contr.on("Transfer", (a, b, c) => {
+          setTxProcessing(false);
+          setTxSuccess(true);
+          setInterval(() => {
+            forceRerender();
+          }, 1000);
+        })
+
       }
     } else {
       if (inputAsset) {
+        if(inputAsset === "ETH") return;
         increaseAllowance();
+        const contr = await ERC20Contract(assetToAddress(inputAsset));
+        contr.on("Approval", (a, b, c) => {
+          setTxSuccess(true)
+          setTxProcessing(false)
+          setInterval(() => {
+            getAllowance();
+            forceRerender();
+          }, 1000);
+        })
       }
     }
+    setTxProcessing(false)
   };
 
   return (
@@ -100,13 +155,18 @@ function Transaction({ inputAsset, outputAsset }) {
           placeholder="Input amount"
         />
       </div>
-      <div className="mt-1 input-balance">Balance: {balance}</div>
+      <div className="mt-1 input-balance">Input validations coming soon</div>
       <div
         onClick={run}
         className="transact-button mx-auto d-flex justify-content-center align-items-center mt-3"
       >
-        {!!inputAsset ? (isApproved() ? "FLIP" : "APPROVE") : "FLIP"}
+        {txProcessing ? "Processing..." : (!!inputAsset ? (isApproved() ? "FLIP" : "APPROVE") : "FLIP")}
       </div>
+      {txSuccess && (
+        <div className="tx-success mx-auto">
+          Transaction success!
+        </div>
+      )}
       {!!inputAsset && !isApproved() && (
         <ApproveNotice assetName={inputAsset} />
 
