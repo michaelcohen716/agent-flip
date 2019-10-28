@@ -20,6 +20,13 @@ We use:
 
 Our first supported asset is BTC/WBTC.
 
+### Usage
+- Choose an available input asset (you must have a balance in that asset)
+- Choose an available output asset
+- Input an amount less than your available input asset balance
+- Flip!
+- You may have to refresh the page to see updated balances
+
 ### Team
 - Michael Cohen ([Github](http://github.com/michaelcohen716), [Twitter](http://twitter.com/mjayceee))
 - Sudeep Biswas ([Github](http://github.com/sudeepb02), [Twitter](https://twitter.com/sudeepbiswas02))
