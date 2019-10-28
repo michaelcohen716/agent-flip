@@ -5,6 +5,8 @@ Sophisticated investors have evolving needs. An investor might be long WBTC when
 
 There are *many* possible permutations. But today, an investor would have to visit several UIs and touch several protocols in order to reposition themselves accordingly.
 
+![flip](./screenshot.png)
+
 ### What Agent Flip does
 Agent Flip is a DeFi trading bridge between protocols. Our first supported asset is BTC. In one contract call, an investor can conveniently reposition, leveraging the power of five different trading protocols at once.
 
