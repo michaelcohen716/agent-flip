@@ -24,6 +24,13 @@ export async function ExchangeContract() {
   );
 }
 
+export async function ERC20Contract(address) {
+  return await new web3.eth.Contract(
+    ERC20,
+    address
+  )
+}
+
 async function TokenContract() {
   return await new web3.eth.Contract(ERC20, ROPSTEN_SETH_ADDRESS);
 }
@@ -101,7 +108,7 @@ export async function addLiquidity(_privateKey) {
 
       const privateKey = Buffer.from(_privateKey, "hex");
 
-      var _hex_value = web3.utils.toHex(web3.utils.toWei(String(1), "ether"));
+      var _hex_value = web3.utils.toHex(web3.utils.toWei(String(10), "ether"));
       var _hex_gasLimit = web3.utils.toHex(_gasLimit.toString());
       var _hex_gasPrice = web3.utils.toHex(_gasPrice.toString());
 

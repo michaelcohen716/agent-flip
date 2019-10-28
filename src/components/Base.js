@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import SupportedAsset from "./SupportedAsset";
 import AssetColumn from "./AssetColumn/AssetColumn";
 import Transaction from "./Transaction/Transaction";
@@ -6,6 +6,9 @@ import detective from "../assets/detective.png";
 import "./Base.css";
 
 function Base() {
+  const [inputAsset, setInputAsset] = useState("");
+  const [outputAsset, setOutputAsset] = useState("");
+
   return (
     <div className="position-relative">
       <div className="silver-bg-right position-absolute" />
@@ -20,13 +23,24 @@ function Base() {
           </div>
           <div className="d-flex mr-2">
             <img src={detective} className="img-fluid detective" />
-            <div className="font-weight-bold">Agent Flip</div>
+            <div className="font-weight-bold agent-flip">Agent Flip</div>
           </div>
         </div>
         <div className="d-flex">
-          <AssetColumn headline="Input" isInput={true} />
-          <Transaction />
-          <AssetColumn headline="Output" />
+          <AssetColumn
+            headline="Input"
+            isInput={true}
+            setAsset={setInputAsset}
+            selectedAsset={inputAsset}
+          />
+          <Transaction inputAsset={inputAsset} outputAsset={outputAsset} />
+          <AssetColumn
+            headline="Output"
+            isInactive={!inputAsset}
+            setAsset={setOutputAsset}
+            selectedInputAsset={inputAsset}
+            selectedAsset={outputAsset}
+          />
         </div>
       </div>
     </div>

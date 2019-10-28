@@ -1,0 +1,11 @@
+.approve-notice {
+    background: green;
+    color: white;
+    top: 20px;
+    left: -10px;
+    width: 110%;
+    height: 100px;
+    border-radius: 8px;
+    font-size: 12px;
+    text-align: center;
+}
