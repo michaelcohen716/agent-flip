@@ -21,8 +21,8 @@ We use:
 Our first supported asset is BTC/WBTC.
 
 ### Team
-- Michael Cohen (Github, Twitter)
-- Sudeep Biswas (Github, Twitter)
+- Michael Cohen ([Github](http://github.com/michaelcohen716), [Twitter](http://twitter.com/mjayceee))
+- Sudeep Biswas ([Github](http://github.com/sudeepb02), [Twitter](https://twitter.com/sudeepbiswas02))
 
 ### What's next for Agent Flip
 - Finish remaining protocol integrations
