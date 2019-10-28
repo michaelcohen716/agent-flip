@@ -10,7 +10,9 @@ import {
   wbtcToIbtc,
   sbtcToEth,
   sbtcToWbtc,
-  sbtcToIbtc
+  sbtcToIbtc,
+  ethToCdai,
+  ibtcToEth
 } from "../../services/flipContract";
 import { getTokenAllowance, setTokenAllowance } from "../../services/erc20";
 import { assetToAddress } from "../../utils/assets";
@@ -21,12 +23,11 @@ const functionMap = {
   ETH: {
     WBTC: ethToWbtc,
     sBTC: ethToSbtc,
-    cDai: null,
+    cDai: ethToCdai,
     dsWBTC: null,
     iBTC: ethToIbtc
   },
   WBTC: {
-    // approve needs to run first
     ETH: wbtcToEth, 
     sBTC: wbtcToSbtc,
     cDai: null,
@@ -38,7 +39,14 @@ const functionMap = {
     WBTC: null, //sbtcToWbtc...failing
     cDai: null,
     dsWBTC: null,
-    iBTC: sbtcToIbtc
+    iBTC: null //sbtcToIbtc...failing
+  },
+  iBTC: {
+    ETH: ibtcToEth,
+    WBTC: null,
+    cDai: null, 
+    dsWBTC: null,
+    sBTC: null
   }
 };
 

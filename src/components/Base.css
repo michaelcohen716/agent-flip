@@ -80,3 +80,12 @@
 .agent-flip {
   letter-spacing: 1px;
 }
+
+.only-ropsten {
+  font-size: 12px;
+  letter-spacing: 0.8px;
+  color: gray;
+  width: 300px;
+  left: 5px;
+  top: 5px;
+}

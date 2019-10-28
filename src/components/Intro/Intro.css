@@ -1,0 +1,30 @@
+.welcome-logo {
+  height: 150px;
+}
+
+.welcome-headline {
+  font-size: 36px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.connect-btn {
+    background: blue;
+    border-radius: 8px;
+    color: white;
+    letter-spacing: 2px;
+    font-size: 24px;
+    text-align: center;
+    cursor: pointer;
+    max-width: 200px;
+}
+
+.subheader {
+    font-size: 20px;
+    letter-spacing: 1px;
+}
+
+.instructions {
+    text-align: center;
+    font-size: 20px;
+}

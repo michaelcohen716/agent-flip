@@ -1,13 +1,17 @@
 import Web3 from "web3";
 import AgentFlip from "../contracts/AgentFlip.json";
+import getWeb3 from "../getWeb3";
 
-const web3 = new Web3(window.web3.currentProvider);
+const web3 = getWeb3();
+// const web3 = new Web3(window.web3.currentProvider);
 
-export const AGENT_FLIP_ROPSTEN = "0x6f8358F6f65f49434AF797a2d8E2780Bf954d8f3";
+export const AGENT_FLIP_ROPSTEN = "0x414ca23afe8EDFd394db2aC21Dd4C3Bc99a34774";
 
 async function FlipAgent() {
   return await new web3.eth.Contract(AgentFlip.abi, AGENT_FLIP_ROPSTEN);
 }
+
+// const from = web3.eth.accounts.givenProvider.selectedAddress
 
 export async function approveERC20() {
   const contr = await FlipAgent();
@@ -105,6 +109,25 @@ export async function sbtcToWbtc(){
 export async function sbtcToIbtc(){
   const contr = await FlipAgent();
   await contr.methods.sbtcToIbtc("2000").send({
+    from: web3.eth.accounts.givenProvider.selectedAddress
+  })
+}
+
+export async function ethToCdai(){
+  const contr = await FlipAgent();
+  await contr.methods.ethToCdai().send({
+    from: web3.eth.accounts.givenProvider.selectedAddress,
+    value: web3.utils.toWei("0.1", "ether"),
+  })
+}
+
+export async function ibtcToEth(){
+  const contr = await FlipAgent();
+
+  const DEADLINE_FROM_NOW = 60 * 15;
+  const deadline = Math.ceil(Date.now() / 1000) + DEADLINE_FROM_NOW;
+
+  await contr.methods.ibtcToEth("10000", deadline).send({
     from: web3.eth.accounts.givenProvider.selectedAddress
   })
 }

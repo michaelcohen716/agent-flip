@@ -1,86 +1,21 @@
 {
-  "contractName": "IFeePool",
+  "contractName": "CErc20Interface",
   "abi": [
     {
-      "constant": true,
-      "inputs": [],
-      "name": "exchangeFeeRate",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "FEE_ADDRESS",
-      "outputs": [
-        {
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "constant": true,
-      "inputs": [
-        {
-          "name": "value",
-          "type": "uint256"
-        }
-      ],
-      "name": "amountReceivedFromExchange",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "constant": true,
-      "inputs": [
-        {
-          "name": "value",
-          "type": "uint256"
-        }
-      ],
-      "name": "amountReceivedFromTransfer",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
       "constant": false,
       "inputs": [
         {
-          "name": "currencyKey",
-          "type": "bytes32"
-        },
-        {
-          "name": "amount",
+          "name": "mintAmount",
           "type": "uint256"
         }
       ],
-      "name": "feePaid",
-      "outputs": [],
+      "name": "mint",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
       "payable": false,
       "stateMutability": "nonpayable",
       "type": "function"
@@ -89,34 +24,17 @@
       "constant": false,
       "inputs": [
         {
-          "name": "account",
-          "type": "address"
-        },
-        {
-          "name": "lockedAmount",
-          "type": "uint256"
-        },
-        {
-          "name": "debtEntryIndex",
+          "name": "redeemTokens",
           "type": "uint256"
         }
       ],
-      "name": "appendAccountIssuanceRecord",
-      "outputs": [],
-      "payable": false,
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "constant": false,
-      "inputs": [
+      "name": "redeem",
+      "outputs": [
         {
-          "name": "amount",
+          "name": "",
           "type": "uint256"
         }
       ],
-      "name": "setRewardsToDistribute",
-      "outputs": [],
       "payable": false,
       "stateMutability": "nonpayable",
       "type": "function"
@@ -44534,7 +44452,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.2",
-  "updatedAt": "2019-10-28T07:20:16.574Z",
+  "updatedAt": "2019-10-28T07:20:16.515Z",
   "devdoc": {
     "methods": {}
   },
